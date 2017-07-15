@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    nav.navbar.navbar-default
+      .container
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#') MR. WHALE
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='#who') WHO
+            li
+              a(href='#about') ABOUT
+            li
+              a(href='#commands') COMMANDS
+
+    block content
+    footer.container-fluid.bg-4.text-center
+      p Mr. Whale A pointless creation By Thomas Bowen
+      
+script(src='/bower_components/jquery/dist/jquery.js')
+script(src='/bower_components/bootstrap/dist/js/bootstrap.js')

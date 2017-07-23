@@ -33,6 +33,9 @@ export default class extends Command {
     }
 
     public async invoke(message: Message, [choice]: [string]): Promise<void> {
+
+        if (choice) return message.reply(`Please pass a choice`);
+        
         let userChoice = choice.trim().toLowerCase();
         let compChoice = Math.random();
         let compChoiceStr = "";

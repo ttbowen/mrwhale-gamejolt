@@ -19,12 +19,19 @@ export default class extends Command {
 
         if (!word) return message.reply('You must provide a word to define');
 
+        let search = word.trim().toLowerCase();
+
+        if (await this._redis.get(`dictionary::${search}`)) {
+            let definition: string = Util.truncate(255, await this._redis.get(`dictionary::${search}`));
+            return message.reply(`${word}: ${definition}`);
+        }
+
         const define = urban(word);
 
         define.first((json) => {
             if (json) {
                 let definition: string = Util.truncate(255, json.definition);
-                return message.reply(`${json.word}: ${definition}`);
+                return message.reply(`${word}: ${definition}`);
             } else {
                 return message.reply(`Could not define this.`);
             }

@@ -63,21 +63,21 @@ export class NotificationManager {
         let index: number;
         let response: string = '';
         let mode: string = await this._client.getCurrentMode(roomId);
-        
-        if (user) {
 
+        if (user) {
             // Fetch user from api as status may not have been updated yet
             let u: SiteUser = await this._client.api.getUser(user.username);
 
             if (u.status == 1) {
-                index = Math.floor(Math.random() * mutedResponses[mode].length);
-                if (mutedResponses[mode][index])
+                if (mutedResponses[mode]) {
+                    index = Math.floor(Math.random() * mutedResponses[mode].length);
                     response = mutedResponses[mode][index].replace(/<<NAME>>/g, Markdown.bold(user.displayName));
-            }
-            else {
-                index = Math.floor(Math.random() * bannedResponses[mode].length);
-                if (bannedResponses[mode][index])
+                }
+            } else {                       
+                if (bannedResponses[mode]) {
+                    index = Math.floor(Math.random() * bannedResponses[mode].length);
                     response = bannedResponses[mode][index].replace(/<<NAME>>/g, Markdown.bold(user.displayName));
+                }
             }
         } else {
             response = `User with Id ${Markdown.bold(userId.toString())} got muted.`;
@@ -89,20 +89,25 @@ export class NotificationManager {
     private async _onUserUnmuted(userId: number, roomId: number, isGlobal: boolean, user?: User): Promise<void> {
 
         let mode: string = await this._client.getCurrentMode(roomId);
-        let index = Math.floor(Math.random() * unmutedResponses[mode].length);
+        let index: number;
+
+        if (unmutedResponses[mode])
+            index = Math.floor(Math.random() * unmutedResponses[mode].length);
+
         let response: string = '';
 
         if (user) {
-            if (unmutedResponses[mode][index])
+            if (unmutedResponses[mode])
                 response = unmutedResponses[mode][index].replace(/<<NAME>>/g, Markdown.bold(user.displayName));
         } else {
             response = `User with Id ${Markdown.bold(userId.toString())} got unmuted.`;
         }
 
         if (userId === this._client.chat.me.id) {
-            index = Math.floor(Math.random() * botUnmuteResponses[mode].length);
-            if (botUnmuteResponses[mode][index])
+            if (botUnmuteResponses[mode]) {
+                index = Math.floor(Math.random() * botUnmuteResponses[mode].length);
                 response = botUnmuteResponses[mode][index];
+            }
         }
         this.sendNotification(`unmuted:${userId}`, response, roomId);
     }
@@ -110,13 +115,15 @@ export class NotificationManager {
     @on('friend-add')
     private async _onFriendAdd(friend: User): Promise<void> {
         let mode: string = await this._client.getCurrentMode(PublicRooms.lobby);
-        let index = Math.floor(Math.random() * friendAddResponses[mode].length);
+        let index: number; 
         let response = '';
 
         if (friend) {
             if (friend.displayName) {
-                if (friendAddResponses[mode][index])
+                if (friendAddResponses[mode]) {
+                    index = Math.floor(Math.random() * friendAddResponses[mode].length);
                     response = friendAddResponses[mode][index].replace(/<<NAME>>/g, Markdown.bold(friend.displayName));
+                }
             }
         }
         this.sendNotification(`friendadd:${friend.id}`, response, PublicRooms.lobby);
@@ -126,14 +133,15 @@ export class NotificationManager {
     private async _onFriendRemove(userId: number, removed?: User): Promise<void> {
 
         let mode: string = await this._client.getCurrentMode(PublicRooms.lobby);
-
-        let index = Math.floor(Math.random() * friendRemoveResponses[mode].length);
+        let index: number;
         let response = '';
 
         if (removed) {
             if (removed.displayName) {
-                if (friendRemoveResponses[mode][index])
+                if (friendRemoveResponses[mode]) {
+                    index = Math.floor(Math.random() * friendRemoveResponses[mode].length);
                     response = friendRemoveResponses[mode][index].replace(/<<NAME>>/g, Markdown.bold(removed.displayName));
+                }
             }
         }
         this.sendNotification(`friendremoved:${userId}`, response, PublicRooms.lobby);

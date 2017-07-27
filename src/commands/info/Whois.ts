@@ -18,8 +18,8 @@ export default class extends Command {
     public async invoke(message: Message, [user]: [SiteUser]): Promise<void> {
         if (!user) return message.reply('Could not find this user.');
 
-        let output: string = `User Id: ${user.id} \n
-             \rUsername: ${user.username} (${user.dogTag}) \n
+        let output: string = `\n\rUser Id: ${user.id} \n
+             \rUsername: ${user.username} \`${user.dogTag}\` \n
              \rDisplay Name: ${user.displayName} \n
              \rType: ${user.type} \n
              \rExperience: ${user.experience} EXP \n

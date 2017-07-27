@@ -44,7 +44,7 @@ export default class extends Command {
 
             for (let i = 0; i < body.items.length; i++) {
                 if(body.items[i])
-                    output += `${i+1}. ${body.items[i].title}\n ${body.items[i].link} \n\n`
+                    output += `\n${i+1}.${body.items[i].title}\n ${body.items[i].link} \n\n`
             }
             return message.reply(output);
         });

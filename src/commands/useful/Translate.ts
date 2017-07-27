@@ -19,6 +19,8 @@ export default class extends Command {
         let source: string = 'auto';
         let targetLang: string = 'en';
         let base: string = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=';
+        
+        if (!text) return message.reply('Please pass some text to translate.');
 
         if (message.toString().length > 255) return message.reply('Sorry but input is too large.');
 

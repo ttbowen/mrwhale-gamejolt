@@ -15,3 +15,11 @@ export const tooLongResponses = [
     'Calm down there trump, we don\'t need any walls here.',
     'You talk too much.'
 ];
+
+export const profanityResponses = [
+    'Do you kiss your mother with that mouth?',
+    'Nice potty mouth.',
+    'Stop fnaffing swearing!',
+    'Watch your mouth',
+    'Stop swearing. We don\'t need that here'
+];

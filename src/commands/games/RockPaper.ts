@@ -34,14 +34,14 @@ export default class extends Command {
 
     public async invoke(message: Message, [choice]: [string]): Promise<void> {
 
-        if (choice) return message.reply(`Please pass a choice`);
+        if (!choice || choice === '') return message.reply(`Please pass a choice`);
         
-        let userChoice = choice.trim().toLowerCase();
-        let compChoice = Math.random();
-        let compChoiceStr = "";
+        let userChoice: string = choice.trim().toLowerCase();
+        let compChoice: number = Math.random();
+        let compChoiceStr: string = "";
 
-        let validChoices = /(rock|paper|scissors)/;
-        let match = userChoice.match(validChoices);
+        let validChoices: RegExp = /(rock|paper|scissors)/;
+        let match: RegExpMatchArray = userChoice.match(validChoices);
 
         if (!match) return message.reply('Please pass rock, paper, scissors.');
 
@@ -54,7 +54,7 @@ export default class extends Command {
         else {
             compChoiceStr = 'scissors';
         }
-        let result = this.compare(userChoice, compChoiceStr);
+        let result: string = this.compare(userChoice, compChoiceStr);
 
         return message.reply(`${compChoice}. ${result}`);
     }

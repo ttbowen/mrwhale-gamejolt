@@ -161,7 +161,7 @@ export class NotificationManager {
 
         if (oldUser.displayName && user.displayName) {
             if (oldUser.displayName !== user.displayName) {
-                response = userUpdatedResponses.default[index].replace(/<<NAME>>/g, Markdown.bold(user.displayName));
+                response = userUpdatedResponses.default[index].replace(/<<NAME>>/g, Markdown.bold(oldUser.displayName));
                 response = response.replace(/<<NEWNAME>>/g, Markdown.bold(user.displayName));
             }
             else if (oldUser.username !== user.username) {

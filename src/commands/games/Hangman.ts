@@ -7,11 +7,24 @@ export default class extends Command {
         super({
             name: 'hangman',
             description: 'Play the classic game "hangman".',
-            usage: '<prefix> hangman <start|guess|end>, [letter]',
+            usage: '<prefix> hangman <start|guess|end>',
             type: 'fun',
             aliases: ['hm', 'hang'],
             pmOnly: true,
-            ignoreCooldown: true
+            ignoreCooldown: true,
+            extraHelp: [{
+                commandName: 'start',
+                description: 'Start a new hangman game.',
+                args: '<prefix> hangman start'
+            }, {
+                commandName: 'guess',
+                description: 'Make a guess for current game.',
+                args: '<prefix> hangman guess, <letter>'
+            }, {
+                commandName: 'end',
+                description: 'End the current game in progress. Only owners may do this.',
+                args: '<prefix> hangman end'
+            }]
         });
         this._games = new Collection<number, Game>();
     }

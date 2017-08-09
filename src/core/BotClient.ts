@@ -1,4 +1,4 @@
-import { Message } from 'gamejolt.js';
+import { Message, User } from 'gamejolt.js';
 import {
     ListenerDecorators,
     Client,
@@ -64,6 +64,12 @@ export class BotClient extends Client {
     private async _onMessage(message: Message): Promise<void> {
 
         this.chat.logMessage(message);
+
+        let ts: string = moment().format('hh:mm');
+        let user: User = message.user;
+        let content: string = message.toString();
+
+        this._winston.logger.log('info', `Room: ${message.roomId} | ${user.username} (${user.id}) - ${content}`);
     }
 
     public setTimeout(callback: (...args: any[]) => void, ms: number, ...args: any[]): NodeJS.Timer {

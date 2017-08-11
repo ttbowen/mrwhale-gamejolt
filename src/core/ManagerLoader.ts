@@ -5,6 +5,7 @@ import { LinkInfoManager } from './managers/LinkInfoManager';
 import { Policer } from './managers/Policer';
 import { ReplyManager } from './managers/ReplyManager';
 import { NotificationManager } from './managers/NotificationManager';
+import { LevelManager } from './managers/LevelManager';
 
 /**
  * 
@@ -24,7 +25,8 @@ export class ManagerLoader {
             infoManager: new LinkInfoManager(this._client),
             policer: new Policer(this._client),
             replyManager: new ReplyManager(this._client),
-            notificationManager: new NotificationManager(this._client)
+            notificationManager: new NotificationManager(this._client),
+            levelManager: new LevelManager(this._client)
         }
     }
     private _client: BotClient;
@@ -37,4 +39,5 @@ type Managers = {
     policer: Policer;
     replyManager: ReplyManager;
     notificationManager: NotificationManager;
+    levelManager: LevelManager
 }

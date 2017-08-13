@@ -117,7 +117,7 @@ export class LevelManager {
             let newLevel = LevelManager.getLevelFromExp(exp);
 
             if (level != newLevel) {
-                message.reply(`Congrats. You just advanced to **Level ${newLevel}** !`);
+                message.reply(`Congrats. You just advanced to **Level ${newLevel}**! 🎊🎉`);
             }
             let levelEntry = { totalExperience: totalExp, experience: exp, level: newLevel, experienceNext: expNext }
             this._redis.hmset(`player::${message.user.id}`, levelEntry);

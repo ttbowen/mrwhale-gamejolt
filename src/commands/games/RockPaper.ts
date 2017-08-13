@@ -17,6 +17,12 @@ export default class extends Command {
         if (first === second) {
             return 'It\'s a tie!';
         }
+        else if (first === 'scissors') {
+            
+            if (second === 'paper') return 'Scissors wins! ✌';
+            else
+                return 'Rock wins! ✊';
+        }
         else if (first === 'rock') {
 
             if (second === 'scissors') return 'Rock wins! ✊';
@@ -56,6 +62,6 @@ export default class extends Command {
         }
         let result: string = this.compare(userChoice, compChoiceStr);
 
-        return message.reply(`${compChoice}. ${result}`);
+        return message.reply(`${compChoiceStr}. ${result}`);
     }
 }

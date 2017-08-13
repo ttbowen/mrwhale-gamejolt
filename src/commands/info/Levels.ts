@@ -8,7 +8,9 @@ export default class extends Command {
             description: 'Get 10 ten players.',
             usage: '<prefix> levels',
             type: 'info',
-            pmOnly: true
+            pmOnly: true,
+            rateLimit: [ 2, 10 * 100 * 30  ],
+            aliases: ['level', 'lvl', 'leaderboard']
         });
     }
 

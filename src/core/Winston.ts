@@ -24,7 +24,6 @@ export class Winston {
 
         this._winston = new (winston.Logger)({
             transports: [
-                new winston.transports.Console({ colorize: true }),
                 new winston.transports.File({
                     filename: `${options.logDir}/${options.logFile}`,
                     level: env === 'development' ? 'debug' : 'info',

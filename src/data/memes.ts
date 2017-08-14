@@ -13,7 +13,7 @@ export default {
     'batman': 438680,
     'mostinteresting': 61532,
     'xxeverywhere': 347390,
-    'wonka': 61582
+    'wonka': 61582,
     'wat': 14230520,
     'bill': 56225174,
     'justwait': 109765,
